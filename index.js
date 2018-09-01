@@ -75,38 +75,29 @@ function endGame() {
 }
 
 function moveDodger(e) {
-  const code = e.which
-
-  if ([LEFT_ARROW, RIGHT_ARROW].indexOf(code) > -1) {
-    e.preventDefault()
-    e.stopPropagation()
-  }
-
-  if (code === LEFT_ARROW) {
-    moveDodgerLeft()
-  } else if (code === RIGHT_ARROW) {
-    moveDodgerRight()
-  }
+  e.preventDefault();
+  e.stopPropagation();
+  // if the key is the right arrow key, move the dodger to the right
+  // if the key is the left arrow key, move the dodger to the left
+  // ise window.requestAnimationFrame, move element 4 px
+    if (e.which === 37) {
+      moveDodgerLeft();
+    } else if (e.which ===39) {
+      moveDodgerRight();
+    }
+    
 }
 
-function moveDodgerLeft() {
-  window.requestAnimationFrame(function() {
-    const left = positionToInteger(DODGER.style.left)
 
-    if (left > 0) {
-      DODGER.style.left = `${left - 4}px`;
-    }
-  })
+function moveDodgerLeft() {
+var myPositionInPixels = document.getElementById("#dodger").style.left
+var myPositionInNum = positionToInteger(myPositionInPixels)
+var newPosition = myPositionInNum - 4
+$("#dodger").style.left = newPosition;
 }
 
 function moveDodgerRight() {
-  window.requestAnimationFrame(function() {
-    const left = positionToInteger(DODGER.style.left)
-
-    if (left < 360) {
-      DODGER.style.left = `${left + 4}px`;
-    }
-  })
+  
 }
 
 function positionToInteger(p) {
